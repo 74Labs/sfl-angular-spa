@@ -1,0 +1,17 @@
+{
+    "name": "sfl-angular-spa",
+    "version": "1.0.0",
+    "authors": [
+        "SFL <seventy.four.laboratories@gmail.com>"
+    ],
+    "description": "AngularJS SPA helpers",
+    "main": "sfl-angular-spa.js",
+    "dependencies": {
+        "sfl-angular-ui": "https://github.com/74Labs/sfl-angular-ui.git",
+        "sfl-angular-auth": "https://github.com/74Labs/sfl-angular-auth.git",
+        "angular-ui-router": "^0"
+    },
+    "license": "MIT",
+    "homepage": "https://github.com/74Labs/sfl-angular-spa",
+    "private": true
+}
