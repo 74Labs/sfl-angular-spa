@@ -7,9 +7,10 @@
     "description": "AngularJS SPA helpers",
     "main": "sfl-angular-spa.js",
     "dependencies": {
+        "sfl-angular-session": "https://github.com/74Labs/sfl-angular-session.git",
         "sfl-angular-ui": "https://github.com/74Labs/sfl-angular-ui.git",
         "sfl-angular-auth": "https://github.com/74Labs/sfl-angular-auth.git",
-        "angular-ui-router": "^0"
+        "angular-ui-router": "^0.2.18"
     },
     "license": "MIT",
     "homepage": "https://github.com/74Labs/sfl-angular-spa",
