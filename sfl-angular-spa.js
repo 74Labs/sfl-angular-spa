@@ -13,26 +13,41 @@ angular.module('sfl.spa', [
     onlineCheckUrl: 'http://localhost:3000'
 })
 
-.provider('sflSpaConfig', function () {
+.provider('sflSpaConfig', function (sflSpaDefaultConfig) {
+    
+    var name = sflSpaDefaultConfig.name;
+    var publicRegistrationEnabled = sflSpaDefaultConfig.publicRegistrationEnabled;
+    var onlineCheckUrl = sflSpaDefaultConfig.onlineCheckUrl;
 
     this.setName = function (value) {
-        this.name = value;
+        name = value;
     };
     
     this.setOnlineCheckUrl = function(value) {
-        this.onlineCheckUrl = value;
+        onlineCheckUrl = value;
     };
     
     this.enablePublicRegistration = function() {
-        this.publicRegistrationEnabled = true;
+        publicRegistrationEnabled = true;
     };
     
     this.disablePublicRegistration = function() {
-        this.publicRegistrationEnabled = false;
+        publicRegistrationEnabled = false;
     };    
 
     this.$get = function () {
-        return this;
+        
+        var self = {};
+        
+        self.getOnlineCheckUrl = function() {
+            return onlineCheckUrl;
+        };
+        
+        self.isPublicRegistrationEnabled = function() {
+            return publicRegistrationEnabled;
+        };
+        
+        return self;
     };
 
 })
@@ -71,9 +86,9 @@ angular.module('sfl.spa', [
 
     $scope.checkOnlineStatus = function () {
         sflUi.loaders.show('online-check');
-        $http.get(sflSpaConfig.onlineCheckUrl)
+        $http.get(sflSpaConfig.getOnlineCheckUrl())
             .success(function () {
-                sflUi.loaders.hide('check');
+                sflUi.loaders.hide('online-check');
                 if (!self.online) {
                     self.online = true;
                     sflSession.set('online', true);
