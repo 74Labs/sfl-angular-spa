@@ -9,13 +9,18 @@ angular.module('sfl.spa', [
 
 .constant('sflSpaDefaultConfig', {
     name: 'Angular SPA Seed',
-    publicRegistrationEnabled: false
+    publicRegistrationEnabled: false,
+    onlineCheckUrl: 'http://localhost:3000'
 })
 
 .provider('sflSpaConfig', function () {
 
     this.setName = function (value) {
         this.name = value;
+    };
+    
+    this.setOnlineCheckUrl = function(value) {
+        this.onlineCheckUrl = value;
     };
     
     this.enablePublicRegistration = function() {
@@ -52,7 +57,7 @@ angular.module('sfl.spa', [
     $translateProvider.useMissingTranslationHandlerLog();
 })
 
-.controller('sflSpaCtrl', function ($scope, $translate, sflAuth, sflUi, sflSession, $http, $rootScope, $interval) {
+.controller('sflSpaCtrl', function ($scope, $translate, sflSpaConfig, sflAuth, sflUi, sflSession, $http, $rootScope, $interval) {
 
     var self = this;
 
@@ -66,7 +71,7 @@ angular.module('sfl.spa', [
 
     $scope.checkOnlineStatus = function () {
         sflUi.loaders.show('online-check');
-        $http.get('http://localhost:3000')
+        $http.get(sflSpaConfig.onlineCheckUrl)
             .success(function () {
                 sflUi.loaders.hide('check');
                 if (!self.online) {
